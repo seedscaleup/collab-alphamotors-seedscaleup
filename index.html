@@ -96,11 +96,23 @@
 <!-- FILM — bande-annonce de la proposition -->
 <section class="sec sec-dark sec-film" id="film">
   <div class="film-inner">
-    <div class="video-frame reveal">
-      <video id="pitchVideo" controls playsinline preload="none" poster="assets/video/alpha-motors-ssu-poster.jpg">
-        <source src="assets/video/alpha-motors-ssu.mp4" type="video/mp4">
-        <p>Votre navigateur ne prend pas en charge la lecture vidéo intégrée. <a href="assets/video/alpha-motors-ssu.mp4" download>Télécharger la vidéo (9,5 Mo)</a>.</p>
-      </video>
+    <div class="video-stage reveal">
+      <div class="video-glow" aria-hidden="true"></div>
+      <div class="video-frame">
+        <span class="frame-corner fc-tl" aria-hidden="true"></span>
+        <span class="frame-corner fc-tr" aria-hidden="true"></span>
+        <span class="frame-corner fc-bl" aria-hidden="true"></span>
+        <span class="frame-corner fc-br" aria-hidden="true"></span>
+        <div class="video-frame-inner">
+          <video id="pitchVideo" controls playsinline preload="none" poster="assets/video/alpha-motors-ssu-poster.jpg">
+            <source src="assets/video/alpha-motors-ssu.mp4" type="video/mp4">
+            <p>Votre navigateur ne prend pas en charge la lecture vidéo intégrée. <a href="assets/video/alpha-motors-ssu.mp4" download>Télécharger la vidéo (9,5 Mo)</a>.</p>
+          </video>
+          <button class="video-play-btn" id="videoPlayBtn" type="button" aria-label="Lire la vidéo">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
     <p class="film-caption reveal">1 min 42 — un aperçu de ce que nous construisons pour Alpha Motors.</p>
   </div>

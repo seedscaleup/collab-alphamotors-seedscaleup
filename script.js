@@ -95,6 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
     videoObserver.observe(pitchVideo);
   }
 
+  /* Custom play button over the pitch video */
+  const videoPlayBtn = document.getElementById("videoPlayBtn");
+  if (pitchVideo && videoPlayBtn) {
+    videoPlayBtn.addEventListener("click", () => pitchVideo.play());
+    pitchVideo.addEventListener("play", () => videoPlayBtn.classList.add("is-hidden"));
+    pitchVideo.addEventListener("pause", () => videoPlayBtn.classList.remove("is-hidden"));
+  }
+
   /* Cover hero loop: respect reduced motion, pause off-screen */
   const coverVideo = document.getElementById("coverVideo");
   if (coverVideo) {
