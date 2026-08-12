@@ -303,26 +303,44 @@ em { font-style: italic; color: var(--cyan); }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.cover-car {
+.cover-video-frame {
   position: relative;
-  width: min(46vw, 620px);
-  color: var(--ink);
-  filter: drop-shadow(0 0 26px rgba(51, 223, 207, 0.28));
+  width: min(46vw, 640px);
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 80px -24px rgba(0, 0, 0, 0.7);
+  background: #000;
+  opacity: 0;
+  animation: frameIn 1s var(--ease) forwards 0.2s;
 }
 
-.cover-car path, .cover-car circle { fill: none; }
-.cover-car .car-body, .cover-car .car-window {
-  stroke-dasharray: 1400;
-  stroke-dashoffset: 1400;
-  animation: drawCar 2.6s var(--ease) forwards 0.3s;
-}
-.cover-car .car-wheel {
-  stroke-dasharray: 160;
-  stroke-dashoffset: 160;
-  animation: drawCar 1.2s var(--ease) forwards 1.6s;
+@keyframes frameIn { to { opacity: 1; } }
+
+.cover-video-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(21, 23, 27, 0.5) 100%);
+  pointer-events: none;
 }
 
-@keyframes drawCar { to { stroke-dashoffset: 0; } }
+.cover-video, .cover-video-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover-video-fallback { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-video { display: none; }
+  .cover-video-fallback { display: block; }
+  .cover-video-frame { animation: none; opacity: 1; }
+}
 
 .cover-inner {
   position: relative;

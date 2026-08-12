@@ -68,16 +68,14 @@
 <section class="cover" id="top">
   <div class="cover-bg">
     <div class="cover-glow"></div>
-    <svg class="cover-car" viewBox="0 0 480 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path class="car-body" d="M30,128 C30,112 46,104 62,101 L96,99 C112,72 145,48 180,40 C215,32 252,32 285,42 L330,58 C355,64 378,70 398,82 C412,90 420,102 421,116 L421,128 L400,128 C398,113 386,102 371,102 C356,102 344,113 342,128 L134,128 C132,113 120,102 105,102 C90,102 78,113 76,128 Z" stroke="currentColor" stroke-width="1.5"/>
-      <path class="car-window" d="M100,99 C118,76 148,56 178,49 C208,42 240,42 268,50 L302,62" stroke="currentColor" stroke-width="1.5"/>
-      <circle class="car-wheel" cx="105" cy="130" r="24" stroke="currentColor" stroke-width="1.5"/>
-      <circle class="car-wheel" cx="371" cy="130" r="24" stroke="currentColor" stroke-width="1.5"/>
-      <circle cx="105" cy="130" r="8" stroke="currentColor" stroke-width="1"/>
-      <circle cx="371" cy="130" r="8" stroke="currentColor" stroke-width="1"/>
-    </svg>
     <div class="cover-rings" aria-hidden="true">
       <span></span><span></span><span></span>
+    </div>
+    <div class="cover-video-frame">
+      <video id="coverVideo" class="cover-video" autoplay muted loop playsinline preload="auto" poster="assets/video/alpha-motors-ssu-poster.jpg" aria-hidden="true">
+        <source src="assets/video/hero-loop.mp4" type="video/mp4">
+      </video>
+      <img class="cover-video-fallback" src="assets/video/alpha-motors-ssu-poster.jpg" alt="" aria-hidden="true">
     </div>
   </div>
   <div class="cover-inner">

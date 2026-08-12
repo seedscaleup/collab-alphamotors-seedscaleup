@@ -95,6 +95,29 @@ document.addEventListener("DOMContentLoaded", () => {
     videoObserver.observe(pitchVideo);
   }
 
+  /* Cover hero loop: respect reduced motion, pause off-screen */
+  const coverVideo = document.getElementById("coverVideo");
+  if (coverVideo) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduceMotion.matches) {
+      coverVideo.pause();
+    } else {
+      const coverVideoObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              coverVideo.play().catch(() => {});
+            } else {
+              coverVideo.pause();
+            }
+          });
+        },
+        { threshold: 0 }
+      );
+      coverVideoObserver.observe(coverVideo);
+    }
+  }
+
   /* Smooth scroll for in-page links */
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (e) => {
