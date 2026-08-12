@@ -394,6 +394,51 @@ em { font-style: italic; color: var(--cyan); }
   .cover-inner { padding: 0 24px; max-width: 100%; }
 }
 
+/* ===== FILM — bande-annonce ===== */
+.sec-film { padding: 120px 0; }
+
+.film-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 32px;
+  text-align: center;
+}
+
+.video-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 70px -24px rgba(0, 0, 0, 0.6);
+  background: #000;
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.video-frame p {
+  padding: 24px;
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 0.9rem;
+}
+
+.video-frame p a { color: var(--cyan); text-decoration: underline; }
+
+.film-caption {
+  margin: 20px 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 720px) {
+  .sec-film { padding: 90px 0; }
+}
+
 /* ===== COMPRÉHENSION — triad + statement ===== */
 .triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px; }
 .triad-item { padding-top: 24px; border-top: 1px solid var(--line); }

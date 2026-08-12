@@ -79,6 +79,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* Pause pitch video when it scrolls out of view */
+  const pitchVideo = document.getElementById("pitchVideo");
+  if (pitchVideo) {
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting && !pitchVideo.paused) {
+            pitchVideo.pause();
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+    videoObserver.observe(pitchVideo);
+  }
+
   /* Smooth scroll for in-page links */
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (e) => {
