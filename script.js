@@ -1,21 +1,108 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const navToggle = document.getElementById("navToggle");
-  const nav = document.getElementById("nav");
+  const topbar = document.getElementById("topbar");
+  const progressBar = document.getElementById("progressBar");
+  const sectionDots = document.querySelectorAll(".section-dots a");
+  const sections = document.querySelectorAll("main section[id], .cover");
 
-  navToggle.addEventListener("click", () => {
-    nav.classList.toggle("open");
-  });
+  /* Scroll progress + topbar state */
+  function onScroll() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + "%";
+    topbar.classList.toggle("is-scrolled", scrollTop > 40);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
-  nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => nav.classList.remove("open"));
-  });
+  /* Active section dot tracking */
+  if (sectionDots.length) {
+    const dotObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.id;
+          const dot = document.querySelector(`.section-dots a[href="#${id}"]`);
+          if (!dot) return;
+          if (entry.isIntersecting) {
+            sectionDots.forEach((d) => d.classList.remove("is-active"));
+            dot.classList.add("is-active");
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    sections.forEach((sec) => dotObserver.observe(sec));
+  }
 
-  const form = document.getElementById("contactForm");
-  const formNote = document.getElementById("formNote");
+  /* Reveal on scroll */
+  const revealEls = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    formNote.textContent = "Merci, votre message a bien été noté. Nous revenons vers vous rapidement.";
-    form.reset();
+  /* Axes accordion (section 06) */
+  const axesList = document.getElementById("axesList");
+  if (axesList) {
+    const rows = axesList.querySelectorAll(".axis-row");
+    rows.forEach((row) => {
+      row.addEventListener("click", () => {
+        const isOpen = row.classList.contains("is-open");
+        rows.forEach((r) => r.classList.remove("is-open"));
+        if (!isOpen) row.classList.add("is-open");
+      });
+    });
+  }
+
+  /* Offer tabs (section 08) */
+  const offerTabs = document.getElementById("offerTabs");
+  if (offerTabs) {
+    const tabs = offerTabs.querySelectorAll(".offer-tab");
+    const details = document.querySelectorAll("[data-offer-detail]");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.offer;
+        tabs.forEach((t) => t.classList.remove("is-active"));
+        tab.classList.add("is-active");
+        details.forEach((d) => d.classList.toggle("is-active", d.dataset.offerDetail === target));
+      });
+    });
+  }
+
+  /* 90-day phases (section 09) */
+  const phases = document.getElementById("phases");
+  if (phases) {
+    const buttons = phases.querySelectorAll(".phase-btn");
+    const panels = phases.querySelectorAll("[data-phase-panel]");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.phase;
+        buttons.forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        panels.forEach((p) => p.classList.toggle("is-active", p.dataset.phasePanel === target));
+      });
+    });
+  }
+
+  /* Smooth scroll for in-page links */
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const id = link.getAttribute("href");
+      if (id.length > 1) {
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
   });
 });
