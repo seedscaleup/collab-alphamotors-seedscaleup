@@ -49,20 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   revealEls.forEach((el) => revealObserver.observe(el));
 
-  /* Axes accordion (section 06) */
-  const axesList = document.getElementById("axesList");
-  if (axesList) {
-    const rows = axesList.querySelectorAll(".axis-row");
-    rows.forEach((row) => {
-      row.addEventListener("click", () => {
-        const isOpen = row.classList.contains("is-open");
-        rows.forEach((r) => r.classList.remove("is-open"));
-        if (!isOpen) row.classList.add("is-open");
-      });
-    });
-  }
-
-  /* Offer tabs (section 08) */
+  /* Offer tabs */
   const offerTabs = document.getElementById("offerTabs");
   if (offerTabs) {
     const tabs = offerTabs.querySelectorAll(".offer-tab");
@@ -77,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* 90-day phases (section 09) */
+  /* 90-day phases */
   const phases = document.getElementById("phases");
   if (phases) {
     const buttons = phases.querySelectorAll(".phase-btn");
