@@ -2,6 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<!-- Served proxied under seedscaleup.com/alphamotors (see seedscaleup-site's
+     next.config.ts rewrites). <base> makes every relative asset/script path
+     below resolve under that prefix regardless of whether the address bar
+     shows a trailing slash, without hardcoding the prefix into each tag —
+     the standalone Vercel deployment of this repo would need this removed. -->
+<base href="/alphamotors/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SeedScaleUp × Alpha Motors — Proposition Commerciale 2026</title>
 <meta name="description" content="Une stratégie sur mesure pour faire du digital un véritable moteur de croissance pour Alpha Motors.">
